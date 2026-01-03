@@ -6,23 +6,17 @@ import { User } from "../models/User.js";
 export const clerkWebhooks = async (req, res) => {
     try {
         // Create a Svix instance with clerk webhook secret
-        const whook = process.env.CLERK_WEBHOOK_SECRET;
+        const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
         if (!whook) {
             return res.status(500).json({ message: "Missing webhook secret" });
         }
 
         //verfiying Headers 
-        let payload;
-        try {
-            payload = await whook.verify(req.body, {
-                "svix-id": req.headers["svix-id"],
-                "svix-timestamp": req.headers["svix-timestamp"],
-                "svix-signature": req.headers["svix-signature"]
-            });
-        } catch (error) {
-            console.error("Webhook verification failed:", err.message);
-            return res.status(401).json({ message: "Invalid signature" });
-        }
+        const payload = await whook.verify(req.body, {
+            "svix-id": req.headers["svix-id"],
+            "svix-timestamp": req.headers["svix-timestamp"],
+            "svix-signature": req.headers["svix-signature"]
+        });
 
         // Getting Data Form reqest body
         const { data, type } = payload;
