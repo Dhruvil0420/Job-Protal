@@ -25,7 +25,7 @@ export const clerkWebhooks = async (req, res) => {
         }
 
         // Getting Data Form reqest body
-        const { data, type } = req.body;
+        const { data, type } = payload;
 
         //Switch Cases for different Event  
         switch (type) {
