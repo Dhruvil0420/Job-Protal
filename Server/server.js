@@ -28,11 +28,7 @@ app.get("/debug-sentry", function mainHandler(req, res) {
   throw new Error("My first Sentry error!");
 });
 
-app.post(
-  "/webhooks",
-  express.raw({ type: "application/json" }),
-  clerkWebhooks
-);
+app.post("/webhooks",clerkWebhooks);
 
 // Give Port 
 const PORT = process.env.PORT || 5000
