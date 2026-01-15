@@ -260,7 +260,7 @@ export const jobsData = [
         location: "Washington",
         level: "Senior Level",
         companyId: {
-            "_id": "670e4d25ca9fda8f1bf359b9",
+            "_id" : "670e4d25ca9fda8f1bf359b9",
             "name": "Slack",
             "email": "slack@demo.com",
             "image": company_icon,
