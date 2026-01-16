@@ -1,9 +1,9 @@
 
 // Register the Company
 
-import { Company } from '../models/company.model.js';
+import { Company } from '../models/Company.model.js'
 import bcrypt from 'bcrypt'
-import {v2 as cloudinary} from 'cloudinary'
+import {v2 as cloudinary} from "cloudinary"
 import generateToken from "../utils/generateToeken.js";
 import { Job } from '../models/Job.model.js';
 import { JobAppliction } from '../models/JobAppliction.model.js';

@@ -40,4 +40,4 @@ const jobShcema = mongoose.Schema({
     }
 })
 
-export const Job = mongoose.model("Job",jobShcema)
+export const Job = mongoose.models.Job || mongoose.model("Job",jobShcema);
