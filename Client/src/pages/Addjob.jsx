@@ -128,7 +128,7 @@ function Addjob() {
           placeholder='25000' />
       </div>
 
-      <button className='bg-black rounded py-3 mt-4 text-white w-28'>ADD</button>
+      <button className='bg-black rounded py-3 mt-4 text-white w-28 cursor-pointer'>ADD</button>
     </form>
   )
 }

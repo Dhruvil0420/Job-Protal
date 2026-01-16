@@ -1,28 +1,26 @@
 import { useContext, useEffect } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate,Navigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import { AppContext } from '../context/AppContext';
 
 function DashBoard() {
   const navigate = useNavigate();
-  const { companyData, companyToken, setcompanyData, setcompanyToken } =
-    useContext(AppContext);
+  const { companyData, setcompanyData, setcompanyToken ,companyToken } = useContext(AppContext);
 
-  useEffect(() => {
-    if (!companyToken) {
-      navigate('/', { replace: true });
-    }
-  }, [companyToken, navigate]);
+  if (!companyToken) {
+    return <Navigate to="/" replace />;
+  }
 
   const logout = () => {
+    navigate('/', { replace: true });
     localStorage.removeItem('companyToken');
     setcompanyData(null);
     setcompanyToken(null);
-    navigate('/', { replace: true });
   };
 
-  if (!companyToken) return null;
-
+  useEffect(() => {
+    navigate('/dashboard/add-job')
+  },[companyToken])
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navbar */}

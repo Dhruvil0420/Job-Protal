@@ -73,12 +73,10 @@ export const applyForJob = async(req,res) =>{
 
     } 
     catch (error) {
-        console.log("This is casth block of usercontroller")
         res.json({
             success: false,
             message: error.message
         })
-        console.log(error.message)
     }
 }
 

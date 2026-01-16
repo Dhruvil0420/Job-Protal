@@ -14,8 +14,6 @@ function Hero(){
             location:locationRef.current.value
         });
         setIsSerached(true);
-        // console.log({title:titleRef.current.value,
-        //     location:locationRef.current.value});
     }
     return(
         <div className="container 2xl:px-20 mx-auto my-10 ">
@@ -28,7 +26,7 @@ function Hero(){
                         <input 
                         type="text"
                         placeholder="Sreach For Jobs"
-                        className="max-sm:text-xs p-2 roundedoutline-nonew-full "
+                        className="max-sm:text-xs p-2 roundedoutline-nonew-full outline-none"
                         ref={titleRef}
                         />
                     </div>
@@ -41,7 +39,7 @@ function Hero(){
                         ref={locationRef}
                         />
                     </div>
-                    <button onClick= {onSerach} className="bg-blue-600 px-6 py-2 rounded text-white m-1">Serach</button>
+                    <button onClick= {onSerach} className="bg-blue-600 px-6 py-2 rounded text-white m-1 cursor-pointer">Serach</button>
                 </div>
             </div>
             <div className="border border-gray-300 shadow-md mx-2 mt-5 p-6 rounded-md flex">

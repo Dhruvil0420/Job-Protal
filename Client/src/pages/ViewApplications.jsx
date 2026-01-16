@@ -19,7 +19,7 @@ function ViewApplications() {
       const { data } = await axios.get(backendUrl + '/api/company/applicants', {
         headers: { token: companyToken }
       });
-      console.log(data)
+  
       if (data.success) {
         setApplictions(data.applications);
       }
@@ -61,7 +61,7 @@ function ViewApplications() {
   }, [companyToken])
 
   return applictions ? applictions.lenth === 0 ? (
-    <div className = 'flex items-center justify-center h-[70vh]'>
+    <div className='flex items-center justify-center h-[70vh]'>
       <p className='text-xl sm:text-2xl'>No Jobs Availabel or posted</p>
     </div>
   ) : (

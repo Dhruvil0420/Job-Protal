@@ -5,7 +5,7 @@ import JobCard from "./JobCard";
 
 
 function Joblisting(){
-    const {isSearch,SerachFilter,setSerachFilter,jobs} = useContext(AppContext);
+    const {isSearch,SearchFilter,setSearchFilter,jobs} = useContext(AppContext);
 
     const [showFilter,setShowFilter] = useState(false);
 
@@ -34,9 +34,9 @@ function Joblisting(){
 
         const matchesLocation = job => selcetedLocation.length === 0 || selcetedLocation.includes(job.location);
 
-        const matchestitle = job => SerachFilter.title === "" || job.title.toLowerCase().includes(SerachFilter.title.toLowerCase());
+        const matchestitle = job => SearchFilter.title === "" || job.title.toLowerCase().includes(SearchFilter.title.toLowerCase());
 
-        const matchesSerachLoction = job => SerachFilter.location === "" || job.location.toLowerCase().includes(SerachFilter.location.toLowerCase())
+        const matchesSerachLoction = job => SearchFilter.location === "" || job.location.toLowerCase().includes(SearchFilter.location.toLowerCase())
 
         const newFilteredJobs = jobs.slice().reverse().filter(
             job => matchesCategory(job) && matchesLocation(job) && matchestitle(job) && matchesSerachLoction(job)
@@ -44,28 +44,28 @@ function Joblisting(){
 
         setfilteredJobs(newFilteredJobs);
         setPages(1);
-    },[jobs,selectedCategories,selcetedLocation,SerachFilter]);
+    },[jobs,selectedCategories,selcetedLocation,SearchFilter]);
     return(
     <div className="container 2xl:px-20 mx-auto flex flex-col lg:flex-row max-lg:space-y-8 py-8">
         {/* sidebar */}
         <div className="w-full lg:w-1/4 bg-white px-4 ">
             {/* Serch Filter From Hero Componet */}
             {
-                isSearch && (SerachFilter.title !== "" || SerachFilter.location !== "")
+                isSearch && (SearchFilter.title !== "" || SearchFilter.location !== "")
                 &&(
                     <>
                     <h3 className="font-medium mb-4 text-lg">Current Search</h3>
                     <div className="mb-4 text-gray-600">
-                        {SerachFilter.title && (
+                        {SearchFilter.title && (
                             <span className="inline-flex gap-2.5 bg-blue-50 border-blue-200 items-center px-4 py-1.5 rounded">
-                                {SerachFilter.title}
-                                <img onClick = {e => setSerachFilter(prev => ({...prev,title:""}))} className = 'cursor-pointer' src={assets.cross_icon}/>
+                                {SearchFilter.title}
+                                <img onClick = {e => setSearchFilter(prev => ({...prev,title:""}))} className = 'cursor-pointer' src={assets.cross_icon}/>
                             </span>
                         )}
-                        {SerachFilter.location && (
+                        {SearchFilter.location && (
                             <span className="ml-2 inline-flex gap-2.5 bg-red-50 border-red-200 items-center px-4 py-1.5 rounded">
-                                {SerachFilter.location}
-                                 <img onClick = {e => setSerachFilter(prev => ({...prev,location:""}))} className = 'cursor-pointer' src={assets.cross_icon}/>
+                                {SearchFilter.location}
+                                 <img onClick = {e => setSearchFilter(prev => ({...prev,location:""}))} className = 'cursor-pointer' src={assets.cross_icon}/>
                             </span>
                         )}
                     </div>

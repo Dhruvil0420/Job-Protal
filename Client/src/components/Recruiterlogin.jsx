@@ -32,7 +32,6 @@ import { toast } from "react-toastify";
                 if (state === "Log in") {
                     const {data} = await axios.post(backendUrl+'/api/company/login',{email,password});
 
-                    console.log(data);
                     if(data?.success){
                         setcompanyData(data.company)
                         setcompanyToken(data.token)
@@ -54,7 +53,6 @@ import { toast } from "react-toastify";
                     formData.append('image',image);
 
                     const {data} = await axios.post(backendUrl + '/api/company/register',formData);
-                    console.log(data);
                     if(data.success){
                         setcompanyData(data.company)
                         setcompanyToken(data.token)

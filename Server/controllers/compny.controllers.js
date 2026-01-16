@@ -12,9 +12,7 @@ import { JobAppliction } from '../models/JobAppliction.model.js';
 export const registerCompany = async (req, res) => {
 
     const { name, email, password } = req.body;
-    console.log(req.body)
     const imageFile = req.file;
-    console.log(req.file)
     if (!name || !email || !password || !imageFile) {
         return res.json({
             success: false,
@@ -145,7 +143,7 @@ export const postJob = async (req, res) => {
 
         res.json({
             success: true,
-            message: "job is Added SuccesFuly ",
+            message: "job is Added Successfully ",
             newJob
         })
     } catch (error) {

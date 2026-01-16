@@ -21,7 +21,6 @@ function Applyjob() {
 
     const { jobs, backendUrl, userData ,userApplications,fetchAppliedJob} = useContext(AppContext);
 
-    console.log(userApplications)
     const { getToken } = useAuth();
 
     const navigate = useNavigate();
@@ -30,8 +29,6 @@ function Applyjob() {
         try {
             const { data } = await axios.get(backendUrl + `/api/jobs/${id}`)
             if (data.success) {
-                // console.log("This Api For Single Job");
-                // console.log(data)
                 setJobData(data.job);
             }
             else {
@@ -138,7 +135,7 @@ function Applyjob() {
                         </div>
 
                         <div className=" flex flex-col justify-center text-end text-sm max-md:text-center max-md:mx-auto ">
-                            <button onClick={applyHandler} className=" bg-blue-600 p-2.5 px-10 text-white rounded">{isAlreadyApplied ? "Already Applied" : "Apply now"}</button>
+                            <button onClick={applyHandler} className=" bg-blue-600 p-2.5 px-10 text-white rounded cursor-pointer">{isAlreadyApplied ? "Already Applied" : "Apply now"}</button>
                             <p className=" mt-1 text-gray-600">Posted {moment(jobData.date).fromNow()} </p>
                         </div>
 
@@ -148,7 +145,7 @@ function Applyjob() {
                         <div className=" w-full lg:w-2/3">
                             <h2 className=" text-xl mb-4 font-bold ">Job description</h2>
                             <div className=" rich-text " dangerouslySetInnerHTML={{ __html: jobData.description }}></div>
-                            <button onClick={applyHandler} className=" bg-blue-600 p-2.5 px-10 text-white rounded mt-10">{isAlreadyApplied ? "Already Applied" : "Apply now"}</button>
+                            <button onClick={applyHandler} className=" bg-blue-600 p-2.5 px-10 text-white rounded mt-10 cursor-pointer">{isAlreadyApplied ? "Already Applied" : "Apply now"}</button>
                         </div>
                         {/*Right part */}
                         <div className=" w-full lg:w-1/4 mt-8 lg:mt-0 lg:ml-8 space-y-5">

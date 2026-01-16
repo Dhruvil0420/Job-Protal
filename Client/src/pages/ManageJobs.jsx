@@ -21,7 +21,6 @@ function ManageJobs() {
       const { data } = await axios.get(backendUrl + '/api/company/list-job', { headers: { token: companyToken } });
 
       if (data.success) {
-        console.log(data.jobData);
         setJobs(data.jobData.reverse());
       }
       else {
@@ -40,14 +39,14 @@ function ManageJobs() {
 
     try {
 
-      const { data } = await axios.post(backendUrl + '/api/company/change-visiblity', 
-        { id },{ headers : {token: companyToken}});
+      const { data } = await axios.post(backendUrl + '/api/company/change-visiblity',
+        { id }, { headers: { token: companyToken } });
 
-      if(data.success){
+      if (data.success) {
         toast.success(data.message);
         feathCompanyJobs()
       }
-      else{
+      else {
         toast.error(data.message);
       }
 
@@ -63,9 +62,9 @@ function ManageJobs() {
     }
   }, [companyToken])
   return jobs ? jobs.length === 0 ? (
-  <div className = 'flex items-center justify-center h-[70vh]'>
-    <p className='text-xl sm:text-2xl'>No Jobs Availabel or posted</p>
-  </div>
+    <div className='flex items-center justify-center h-[70vh]'>
+      <p className='text-xl sm:text-2xl'>No Jobs Availabel or posted</p>
+    </div>
   ) : (
     <div className='container p-4 max-w-5xl'>
       <div className='overflow-x-auto'>
@@ -99,7 +98,7 @@ function ManageJobs() {
                   <input
                     onChange={() => changeJobVisibility(job._id)}
                     type="checkbox"
-                    checked = {job.visible}
+                    checked={job.visible}
                     className='scale-125 ml-4' />
                 </td>
               </tr>
@@ -111,7 +110,7 @@ function ManageJobs() {
         <button onClick={() => navigate('/dashboard/add-job')} className='bg-black text-white px-4 py-2 rounded'>Add new job</button>
       </div>
     </div>
-  ): <Loading/>
+  ) : <Loading />
 }
 
 export default ManageJobs;
