@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { Company } from '../models/company.model.js';
+import { Company } from '../models/Company.model.js'
 
 export const verifyJwt = async(req,res,next) => {
     const token = req.headers.token
