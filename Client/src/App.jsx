@@ -25,14 +25,15 @@ function App() {
         <Route path = '/' element = {<Home/>}/>
         <Route path = '/apply-job/:id' element = {<Applyjob/>}/>
         <Route path = '/application' element = {<Application/>}/>
-        <Route path =  '/dashboard' element = {<DashBoard/>}>
-        { companyToken 
-        ? <>
-        <Route path = 'add-job' element = {<Addjob/>}/>
-        <Route path = 'manage-job' element = {<ManageJobs/>}/>
-        <Route path = 'view-applications' element = {<ViewApplications/>}/>
-         </> : null}
-        </Route> 
+  
+        <Route path="/dashboard" element={<DashBoard />}>
+          <Route index element={<Addjob />} />
+          <Route path="add-job" element={<Addjob />} />
+          <Route path="manage-job" element={<ManageJobs />} />
+          <Route path="view-applications" element={<ViewApplications />} />
+        </Route>
+
+
       </Routes>
     </div>
   );

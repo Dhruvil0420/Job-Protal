@@ -61,90 +61,45 @@ function ManageJobs() {
       feathCompanyJobs();
     }
   }, [companyToken])
-  return jobs ? jobs.length === 0 ? (
-  <div className="flex items-center justify-center h-[70vh]">
-    <p className="text-lg sm:text-2xl text-gray-500">
-      No jobs available or posted
-    </p>
-  </div>
-) : (
-  <div className="max-w-7xl mx-auto p-3 sm:p-4">
 
-    {/* Table Wrapper */}
-    <div className="overflow-x-auto rounded-xl border bg-white shadow-sm">
-      <table className="min-w-[800px] w-full text-xs sm:text-sm">
-
-        {/* Table Head */}
-        <thead className="bg-gray-50 border-b">
-          <tr>
-            <th className="px-3 sm:px-5 py-2 sm:py-3 text-left font-semibold text-gray-600 max-sm:hidden">#</th>
-            <th className="px-3 sm:px-5 py-2 sm:py-3 text-left font-semibold text-gray-600">Job Title</th>
-            <th className="px-3 sm:px-5 py-2 sm:py-3 text-left font-semibold text-gray-600 max-sm:hidden">Date</th>
-            <th className="px-3 sm:px-5 py-2 sm:py-3 text-left font-semibold text-gray-600 max-sm:hidden">Location</th>
-            <th className="px-3 sm:px-5 py-2 sm:py-3 text-center font-semibold text-gray-600">Applicants</th>
-            <th className="px-3 sm:px-5 py-2 sm:py-3 text-left font-semibold text-gray-600">Visible</th>
-          </tr>
-        </thead>
-
-        {/* Table Body */}
-        <tbody>
-          {jobs.map((job, index) => (
-            <tr
-              key={job._id}
-              className="border-b hover:bg-gray-50 active:bg-gray-100 transition"
-            >
-              <td className="px-3 sm:px-5 py-2 sm:py-4 max-sm:hidden font-medium text-gray-600">
-                {index + 1}
-              </td>
-
-              <td className="px-3 sm:px-5 py-2 sm:py-4 text-gray-800 font-medium">
-                {job.title}
-              </td>
-
-              <td className="px-3 sm:px-5 py-2 sm:py-4 text-gray-600 max-sm:hidden">
-                {moment(job.date).format('ll')}
-              </td>
-
-              <td className="px-3 sm:px-5 py-2 sm:py-4 text-gray-600 max-sm:hidden">
-                {job.location}
-              </td>
-
-              <td className="px-3 sm:px-5 py-2 sm:py-4 text-center font-semibold text-gray-700">
-                {job.applicants}
-              </td>
-
-              <td className="px-3 sm:px-5 py-2 sm:py-4">
-                <label className="inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={job.visible}
-                    onChange={() => changeJobVisibility(job._id)}
-                    className="sr-only peer"
-                  />
-                  <div className="w-9 h-5 sm:w-11 sm:h-6 bg-gray-200 rounded-full peer peer-checked:bg-green-500 transition relative">
-                    <div className="absolute top-0.5 left-0.5 w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full transition peer-checked:translate-x-4 sm:peer-checked:translate-x-5" />
-                  </div>
-                </label>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-
-    {/* Footer Action */}
-    <div className="mt-4 flex justify-end">
-      <button
-        onClick={() => navigate('/dashboard/add-job')}
-        className="px-5 py-2 rounded-lg bg-black text-white text-sm font-medium hover:bg-gray-900 transition"
-      >
-        Add New Job
-      </button>
-    </div>
-
-  </div>
-) : <Loading />;
-
+  return jobs ? jobs.length === 0 ? ( 
+    <div className="flex items-center justify-center h-[70vh]"> 
+        <p className="text-xl sm:text-2xl">No Jobs Available or posted</p>
+    </div>) : (
+        <div className="container p-4 max-w-5xl">
+            <div className="overflow-x-auto">
+                <table className="min-w-full bg-white border border-gray-200 max-sm:text-sm">
+                    <thead>
+                        <tr>
+                            <th className="py-2 px-4 border-b text-left max-sm:hidden border-gray-100">#</th>
+                            <th className="py-2 px-4 border-b text-left border-gray-100">Job Title</th>
+                            <th className="py-2 px-4 border-b text-left max-sm:hidden border-gray-100">Date</th>
+                            <th className="py-2 px-4 border-b text-left max-sm:hidden border-gray-100">Location</th>
+                            <th className="py-2 px-4 border-b text-center border-gray-100">Applicants</th>
+                            <th className="py-2 px-4 border-b text-left border-gray-100">Visible</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {jobs.map((job,index)=>(
+                            <tr key={index} className="text-gray-700">
+                                <td className="py-2 px-4 border-b max-sm:hidden border-gray-100">{index+1}</td>
+                                <td className="py-2 px-4 border-b border-gray-100">{job.title}</td>
+                                <td className="py-2 px-4 border-b max-sm:hidden border-gray-100">{moment(job.date).format('ll')}</td>
+                                <td className="py-2 px-4 border-b max-sm:hidden border-gray-100">{job.location}</td>
+                                <td className="py-2 px-4 border-b text-center border-gray-100">{job.applicants}</td>
+                                <td className="py-2 px-4 border-b border-gray-100" >
+                                    <input onChange={()=>changeJobVisibility(job._id)} className="scale-125 ml-4" type="checkbox" checked = {job.visible} />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            <div className="mt-4 flex justify-end">
+                <button onClick={() =>navigate('/dashboard/add-job')} className="bg-black text-white py-2 px-4 rounded cursor-pointer">Add new job</button>
+            </div>
+        </div>
+    ) : <Loading />
 }
 
 export default ManageJobs;
