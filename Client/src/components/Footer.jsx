@@ -20,7 +20,7 @@ function Footer() {
         </a>
 
         <a
-          href="https://twitter.com/YOUR_USERNAME"
+          href="https://x.com/Dhruvil648627"
           target="_blank"
           rel="noopener noreferrer"
         >
