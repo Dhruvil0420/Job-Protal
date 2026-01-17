@@ -102,42 +102,33 @@ function ViewApplications() {
                                         Resume <img src={assets.resume_download_icon} alt="" />
                                     </a>
                                 </td>
-                                
-                                <td className="py-2 px-4 border-b relative overflow-visible">
-                                    {applicant.status === "Pending" ? (
-                                      <div className="relative inline-block group">
-                                        <button className="text-gray-600 font-bold px-2">⋮</button>
-
-                                        <div className="absolute right-0 top-full mt-1 w-32 bg-white border border-gray-200 rounded shadow 
-                                                        hidden group-hover:block z-20">
-                                          <button
-                                            onClick={() => changeApplictionStatus(applicant._id, "Accepted")}
-                                            className="block w-full text-left px-4 py-2 text-green-600 hover:bg-green-50"
-                                          >
-                                            Accept
-                                          </button>
-                                          <button
-                                            onClick={() => changeApplictionStatus(applicant._id, "Rejected")}
-                                            className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50"
-                                          >
-                                            Reject
-                                          </button>
+                                <td className="py-2 px-4 border-b relative">
+                                    {applicant.status === "Pending"
+                                     ?  <div className="relative inline-block text-left group">
+                                        <button className="text-gray-500 action-button cursor-pointer">...</button>
+                                        <div className="z-10 hidden absolute right-0 md:left-0 top-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow group-hover:block">
+                                                <button onClick={() => changeApplictionStatus(applicant._id,'Accepted')}  className="block w-full text-left px-4 py-2  text-blue-500 hover:bg-gray-100 cursor-pointer">Accept</button>
+                                                <button onClick={() =>changeApplictionStatus(applicant._id,'Rejected')} className="block w-full text-left px-4 py-2  text-red-500 hover:bg-gray-100 cursor-pointer">Reject</button>
                                         </div>
-                                      </div>
-                                    ) : (
+                                    </div>
+                                    : (
                                       <span
                                         className={`font-medium px-2 py-1 rounded text-sm
                                           ${
                                             applicant.status === "Accepted"
                                               ? "text-green-600 bg-green-50"
-                                              : "text-red-600 bg-red-50"
-                                          }`}
+                                              : applicant.status === "Rejected"
+                                              ? "text-red-600 bg-red-50"
+                                              : "text-gray-600 bg-gray-100"
+                                          }
+                                        `}
                                       >
                                         {applicant.status}
                                       </span>
-                                    )}
-                                </td>
+                                    )
+                                    }
 
+                                </td>
 
                             </tr>
                         ))}
