@@ -20,7 +20,10 @@ export const AppContextProvider = (props) => {
 
     const [isRecruiterLogin, setisRecruiterLogin] = useState(false);
 
-    const [companyToken, setcompanyToken] = useState(null);
+    const [companyToken, setcompanyToken] = useState(
+        localStorage.getItem("companyToken")
+    );
+
     const [companyData, setcompanyData] = useState(null);
 
     const [userData, setUserData] = useState(null);
@@ -152,6 +155,15 @@ export const AppContextProvider = (props) => {
             fetchUserData();
         }
     },[user])
+
+    useEffect(() => {
+        if (companyToken) {
+            localStorage.setItem("companyToken", companyToken);
+        } else {
+            localStorage.removeItem("companyToken");
+        }
+    }, [companyToken]);
+
 
     const value = {
         isSearch, setIsSerached,

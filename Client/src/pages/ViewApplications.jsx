@@ -9,7 +9,7 @@ function ViewApplications() {
 
   const { backendUrl, companyToken } = useContext(AppContext);
 
-  const [applictions, setApplictions] = useState();
+  const [applictions, setApplictions] = useState([]);
 
 
   // Featch Applied User For This comapny
@@ -80,11 +80,18 @@ function ViewApplications() {
                     </thead>
                     <tbody>
                         {applictions.filter(item =>item.jobId && item.userId).map((applicant,index)=>(
-                            <tr key={index} className="text-gray-700">
+                            <tr key={index} className="text-gray-700 border-b last:border-b-0 hover:bg-gray-50 transition">
+
                                 <td className="py-2 px-4 border-b text-center">{index+1}</td>
-                                <td className="py-2 px-4 border-b text-center flex items-center">
-                                    <img className="w-10 h-10 rounded-fullmr-3 max-sm:hidden" src={applicant.userId.image} alt="" />
-                                    <span>{applicant.userId.name}</span>
+                                <td className="py-3 px-4 border-b">
+                                  <div className="flex items-center gap-3 justify-start">
+                                    <img
+                                      className="w-9 h-9 rounded-full object-cover max-sm:hidden"
+                                      src={applicant.userId.image}
+                                      alt=""
+                                    />
+                                    <span className="font-medium">{applicant.userId.name}</span>
+                                  </div>
                                 </td>
                                 <td className="py-2 px-4 border-b max-sm:hidden">{applicant.jobId.title}</td>
                                 <td className="py-2 px-4 border-b max-sm:hidden">{applicant.jobId.location}</td>
@@ -95,19 +102,43 @@ function ViewApplications() {
                                         Resume <img src={assets.resume_download_icon} alt="" />
                                     </a>
                                 </td>
-                                <td className="py-2 px-4 border-b relative">
-                                    {applicant.status === "Pending"
-                                     ?  <div className="relative inline-block text-left group">
-                                        <button className="text-gray-500 action-button cursor-pointer">...</button>
-                                        <div className="z-10 hidden absolute right-0 md:left-0 top-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow group-hover:block">
-                                                <button onClick={() => changeApplictionStatus(applicant._id,'Accepted')}  className="block w-full text-left px-4 py-2  text-blue-500 hover:bg-gray-100 cursor-pointer">Accept</button>
-                                                <button onClick={() =>changeApplictionStatus(applicant._id,'Rejected')} className="block w-full text-left px-4 py-2  text-red-500 hover:bg-gray-100 cursor-pointer">Reject</button>
-                                        </div>
-                                    </div>
-                                    : <div>{applicant.status}</div>
-                                    }
+                                
+                                <td className="py-2 px-4 border-b relative overflow-visible">
+                                    {applicant.status === "Pending" ? (
+                                      <div className="relative inline-block group">
+                                        <button className="text-gray-600 font-bold px-2">⋮</button>
 
+                                        <div className="absolute right-0 top-full mt-1 w-32 bg-white border border-gray-200 rounded shadow 
+                                                        hidden group-hover:block z-20">
+                                          <button
+                                            onClick={() => changeApplictionStatus(applicant._id, "Accepted")}
+                                            className="block w-full text-left px-4 py-2 text-green-600 hover:bg-green-50"
+                                          >
+                                            Accept
+                                          </button>
+                                          <button
+                                            onClick={() => changeApplictionStatus(applicant._id, "Rejected")}
+                                            className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50"
+                                          >
+                                            Reject
+                                          </button>
+                                        </div>
+                                      </div>
+                                    ) : (
+                                      <span
+                                        className={`font-medium px-2 py-1 rounded text-sm
+                                          ${
+                                            applicant.status === "Accepted"
+                                              ? "text-green-600 bg-green-50"
+                                              : "text-red-600 bg-red-50"
+                                          }`}
+                                      >
+                                        {applicant.status}
+                                      </span>
+                                    )}
                                 </td>
+
+
                             </tr>
                         ))}
                     </tbody>
