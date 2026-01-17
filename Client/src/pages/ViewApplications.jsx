@@ -11,11 +11,13 @@ function ViewApplications() {
 
   const [applictions, setApplictions] = useState([]);
 
+  const [loading,setloading] = useState(true);
 
   // Featch Applied User For This comapny
   const featchCompanyJobApplications = async () => {
 
     try {
+      setloading(true);
       const { data } = await axios.get(backendUrl + '/api/company/applicants', {
         headers: { token: companyToken }
       });
@@ -29,6 +31,9 @@ function ViewApplications() {
     }
     catch (error) {
       toast.error(error.message)
+    }
+    finally {
+      setloading(false);
     }
   }
 
@@ -60,11 +65,17 @@ function ViewApplications() {
     }
   }, [companyToken])
 
-  return applictions ? applictions.length === 0 ? (
+  if(loading){
+    return <Loading/>
+  }
+  if(applictions.length === 0){
+    return (
     <div className="flex items-center justify-center h-[70vh]"> 
         <p className="text-xl sm:text-2xl">No Applications Available</p>
     </div>
-    ) :(
+    ) 
+  }
+  return (
         <div className="container mx-auto p-4">
             <div>
                 <table className="w-full max-w-4xl bg-white border border-gray-200 max-sm:text-sm">
@@ -136,7 +147,7 @@ function ViewApplications() {
                 </table>
             </div>
         </div>
-    ) : <Loading />
+    ) 
 }
 
 export default ViewApplications; 
