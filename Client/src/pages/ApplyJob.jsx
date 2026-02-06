@@ -17,7 +17,7 @@ function Applyjob() {
   const navigate = useNavigate();
   const { getToken } = useAuth();
 
-  const { jobs,backendUrl,userData,userApplications,fetchAppliedJob } = useContext(AppContext);
+  const { jobs, backendUrl, userData, userApplications, fetchAppliedJob } = useContext(AppContext);
 
   const [jobData, setJobData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -51,11 +51,11 @@ function Applyjob() {
     );
   }, [jobData, userApplications]);
 
-    useEffect(() => {
-        if (userData && userApplications.length === 0) {
-            fetchAppliedJob();
-        }
-    }, [userData]);
+  useEffect(() => {
+    if (userData && userApplications.length === 0) {
+      fetchAppliedJob();
+    }
+  }, [userData]);
 
 
   /* ---------------- Apply Handler ---------------- */
@@ -85,7 +85,7 @@ function Applyjob() {
 
       if (data.success) {
         toast.success(data.message);
-        fetchAppliedJob(); 
+        fetchAppliedJob();
       } else {
         toast.error(data.message);
       }
@@ -99,13 +99,12 @@ function Applyjob() {
   /* ---------------- Reusable Button ---------------- */
   const ApplyButton = () => (
     <button
-      onClick = {applyHandler}
-      disabled = {isAlreadyApplied || loading}
+      onClick={applyHandler}
+      disabled={isAlreadyApplied || loading}
       className={`p-2.5 px-10 rounded text-white transition
-        ${
-          isAlreadyApplied
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-blue-600 hover:bg-blue-700"
+        ${isAlreadyApplied
+          ? "bg-gray-400 cursor-not-allowed"
+          : "bg-blue-600 hover:bg-blue-700"
         }
       `}
     >
@@ -136,24 +135,30 @@ function Applyjob() {
                 </h1>
 
                 <div className="flex flex-wrap justify-center md:justify-start gap-6 mt-2 text-gray-600">
+
                   <span className="flex gap-1 items-center">
-                    <img src={assets.suitcase_icon} alt="" />
+                    <img className="h-4 sm:h-5 md:h-6" src={assets.suitcase_icon} alt="" />
                     {jobData.companyId.name}
                   </span>
+
                   <span className="flex gap-1 items-center">
-                    <img src={assets.location_icon} alt="" />
+                    <img className="h-4 sm:h-5 md:h-6" src={assets.location_icon} alt="" />
                     {jobData.location}
                   </span>
+
                   <span className="flex gap-1 items-center">
-                    <img src={assets.person_icon} alt="" />
+                    <img className="h-4 sm:h-5 md:h-6" src={assets.person_icon} alt="" />
                     {jobData.level}
                   </span>
+
                   <span className="flex gap-1 items-center">
-                    <img src={assets.money_icon} alt="" />
+                    <img className="h-4 sm:h-5 md:h-6" src={assets.money_icon} alt="" />
                     CTC : {kconvert.convertTo(jobData.salary)}
                   </span>
+
                 </div>
               </div>
+
             </div>
 
             <div className="flex flex-col justify-center text-end max-md:text-center">
