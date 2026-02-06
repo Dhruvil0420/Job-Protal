@@ -9,7 +9,7 @@ function Joblisting(){
 
     const [showFilter,setShowFilter] = useState(false);
 
-    const [Pages,setPages] = useState(1);
+    const [pages,setPages] = useState(1);
 
     const [selectedCategories,setselectedCategories] = useState([]);
 
@@ -38,7 +38,7 @@ function Joblisting(){
 
         const matchesSerachLoction = job => SearchFilter.location === "" || job.location.toLowerCase().includes(SearchFilter.location.toLowerCase())
 
-        const newFilteredJobs = jobs.slice().reverse().filter(
+        const newFilteredJobs = jobs.slice().filter(
             job => matchesCategory(job) && matchesLocation(job) && matchestitle(job) && matchesSerachLoction(job)
         ) 
 
@@ -73,7 +73,7 @@ function Joblisting(){
                 ) 
             }
 
-            <button onClick= {(e => setShowFilter((prev) => !prev))}className="border border-gray-400 px-6 py-1.5 lg:hidden rounded">
+            <button onClick= {(e => setShowFilter((prev) => !prev))} className="border border-gray-400 px-6 py-1.5 lg:hidden rounded">
                 {showFilter ? "Close" : "Filters"}
             </button>
             {/* Cetegory Filter */}
@@ -121,7 +121,7 @@ function Joblisting(){
                 <p className="mb-8">Get your desired job from top companies</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
                     {
-                        filteredJobs.slice((Pages-1)*6,Pages*6).map((job,index) => (
+                        filteredJobs.slice((pages-1)*6,pages*6).map((job,index) => (
                             <JobCard key={index} job = {job}/>
                         ))
                     }
@@ -131,15 +131,15 @@ function Joblisting(){
                 {jobs.length> 0 && (
                     <div className="flex items-center justify-center space-x-2 mt-10">
                         <a href = '#job-list'>
-                            <img onClick={() => setPages(Math.max(Pages-1,1))} src={assets.left_arrow_icon} alt="" />
+                            <img onClick={() => setPages(Math.max(pages-1,1))} src={assets.left_arrow_icon} alt="" />
                         </a>
                         {Array.from({length:Math.ceil(filteredJobs.length/6)}).map((_,index) => (
                             <a key = {index} href='#job-list'>
-                                <button onClick ={() => setPages(index+1)}className={`w-10 h-10 flex items-center justify-center border border-gray-300 rounded ${Pages === index+1 ? 'bg-blue-100 text-blue-500' : 'text-gray-500'}`}>{index+1}</button>
+                                <button onClick ={() => setPages(index+1)}className={`w-10 h-10 flex items-center justify-center border border-gray-300 rounded ${pages === index+1 ? 'bg-blue-100 text-blue-500' : 'text-gray-500'}`}>{index+1}</button>
                             </a>
                         ))}
                         <a href = '#job-list'>
-                            <img onClick={() => setPages(Math.min(Math.ceil(filteredJobs.length/6),Pages+1))} src={assets.right_arrow_icon} alt="" />
+                            <img onClick={() => setPages(Math.min(Math.ceil(filteredJobs.length/6),pages+1))} src={assets.right_arrow_icon} alt="" />
                         </a>
                     </div>
                 )}

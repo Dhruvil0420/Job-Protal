@@ -2,45 +2,53 @@ import React, { useContext, useRef } from "react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 
-function Hero(){
-    const {setSerachFilter,setIsSerached} = useContext(AppContext);
+function Hero() {
+    const { setSearchFilter, setIsSerached } = useContext(AppContext);
 
     const titleRef = useRef(null);
     const locationRef = useRef(null);
 
     const onSerach = () => {
-        setSerachFilter({
-            title:titleRef.current.value,
-            location:locationRef.current.value
+        setSearchFilter({
+            title: titleRef.current.value,
+            location: locationRef.current.value
         });
         setIsSerached(true);
     }
-    return(
+    return (
         <div className="container 2xl:px-20 mx-auto my-10 ">
             <div className='bg-gradient-to-r from-purple-800 to-purple-950 text-white py-16 text-center mx-2 rounded-xl'>
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font font-medium mb-4">Over 10,000+ jobs to apply</h2>
                 <p className="mb-8 max-w-xl mx-auto font-light px-5">Your Next Big Career Move Starts Right Here - Explore the Best Job Opportunities and Take the First Step Toward Your Future!</p>
-                <div className="flex justify-detween items-center bg-white rounded text-gray-600 max-w-xl pl-4 mx-4 sm:mx-auto">
-                    <div className="flex items-center">
-                        <img className= 'h-4 sm:h-5'src={assets.search_icon} alt=""/>
-                        <input 
-                        type="text"
-                        placeholder="Sreach For Jobs"
-                        className="max-sm:text-xs p-2 roundedoutline-nonew-full outline-none"
-                        ref={titleRef}
+
+                <div className="flex justify-between items-center bg-white rounded text-gray-600 max-w-xl pl-4 mx-4 sm:mx-auto">
+
+                    {/* Search */}
+                    <div className="flex items-center flex-1 min-w-0 ">
+                        <img className="h-4 sm:h-5" src={assets.search_icon} alt="" />
+                        <input
+                            type="text"
+                            placeholder="Sreach For Jobs"
+                            className="max-sm:text-xs p-2 w-full outline-none"
+                            ref={titleRef}
                         />
                     </div>
-                    <div className="flex items-center">
-                        <img className= 'h-4 sm:h-5' src={assets.location_icon} alt=""/>
-                        <input 
-                        type="text"
-                        placeholder="Location"
-                        className="max-sm:text-xs p-2 rounded outline-none w-full "
-                        ref={locationRef}
+
+                    {/* Location */}
+                    <div className="flex items-center flex-1 min-w-0">
+                        <img className="h-4 sm:h-5" src={assets.location_icon} alt="" />
+                        <input
+                            type="text"
+                            placeholder="Location"
+                            className="max-sm:text-xs p-2 w-full outline-none"
+                            ref={locationRef}
                         />
                     </div>
-                    <button onClick= {onSerach} className="bg-blue-600 px-6 py-2 rounded text-white m-1 cursor-pointer">Serach</button>
+
+                    <button onClick={onSerach} className="bg-blue-600 px-6 py-2 rounded text-white m-1 cursor-pointer">Serach</button>
+
                 </div>
+
             </div>
             <div className="border border-gray-300 shadow-md mx-2 mt-5 p-6 rounded-md flex">
                 <div className="flex justify-center gap-10 lg:gap-16 flex-wrap ">
